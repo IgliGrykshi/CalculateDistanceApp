@@ -14,13 +14,15 @@ class Results extends Component {
 
   componentDidMount(){
     document.title = "Results page";
-    const url = this.props.location.search.split("=")
-    const data = JSON.parse(decodeURIComponent(url[1]))
 
     if(!this.props.location.state){
       this.props.history.push("/");
     }
-    else this.setState(data, () => this.calculateResults(this.state.firstAddressCoords, this.state.secondAddressCoords));
+    else {
+      const url = this.props.location.search.split("=")
+      const data = JSON.parse(decodeURIComponent(url[1]))
+      this.setState(data, () => this.calculateResults(this.state.firstAddressCoords, this.state.secondAddressCoords));
+    } 
   }
 
   calculateResults = (coord1, coord2) => {
